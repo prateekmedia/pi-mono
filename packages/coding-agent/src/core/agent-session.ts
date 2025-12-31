@@ -1506,7 +1506,9 @@ export class AgentSession {
 	 *   - selectedText: The text of the selected user message (for editor pre-fill)
 	 *   - cancelled: True if a hook cancelled the branch
 	 */
-	async branch(entryId: string): Promise<{ selectedText: string; cancelled: boolean }> {
+	async branch(
+		entryId: string,
+	): Promise<{ selectedText: string; cancelled: boolean; skipConversationRestore?: boolean }> {
 		const previousSessionFile = this.sessionFile;
 		const selectedEntry = this.sessionManager.getEntry(entryId);
 
@@ -1555,7 +1557,7 @@ export class AgentSession {
 			this.agent.replaceMessages(sessionContext.messages);
 		}
 
-		return { selectedText, cancelled: false };
+		return { selectedText, cancelled: false, skipConversationRestore };
 	}
 
 	// =========================================================================

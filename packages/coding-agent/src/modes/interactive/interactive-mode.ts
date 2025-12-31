@@ -1580,8 +1580,10 @@ export class InteractiveMode {
 						return;
 					}
 
-					this.chatContainer.clear();
-					this.renderInitialMessages();
+					if (!result.skipConversationRestore) {
+						this.chatContainer.clear();
+						this.renderInitialMessages();
+					}
 					this.editor.setText(result.selectedText);
 					done();
 					this.showStatus("Branched to new session");
